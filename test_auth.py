@@ -9,7 +9,7 @@ import unittest, time, re
 
 class TestAuthorisation(unittest.TestCase):
     def setUp(self):
-        self.wd = webdriver.Chrome(executable_path=r'/usr/local/bin/chromedriver')
+        self.wd = webdriver.Chrome(executable_path=r'/Users/v.bushlanov')
         self.wd.implicitly_wait(30)
 
     def test_authorisation(self):
