@@ -14,14 +14,22 @@ class TestAuthorisation(unittest.TestCase):
 
     def test_authorisation(self):
         wd = self.wd
+        # Переход на ПрайсПорт
+        self.open_home_page(wd)
+        # Ввод почты и авторизация
+        self.login(wd, email="v.bushlanov@thehead.ru")
+
+    def login(self, wd, email="v.bushlanov@thehead.ru"):
+        wd.find_element_by_id(":R1svf9tkq:-form-item").send_keys(email)
+        wd.find_element_by_xpath("//button[@type='submit']").click()
+        wd.get("https://partner.qa.price-port.ru/")
+
+    def open_home_page(self, wd):
         wd.get("https://qa.price-port.ru/")
         wd.find_element_by_css_selector("a.button.button_accent.button-icon.header__button-personal > svg > path").click()
         wd.get("https://partner.qa.price-port.ru/sign-in")
         wd.find_element_by_xpath("//div[@id='root']/div/div/div[2]/div/form/div/div/label").click()
         wd.find_element_by_id(":R1svf9tkq:-form-item").clear()
-        wd.find_element_by_id(":R1svf9tkq:-form-item").send_keys("v.bushlanov@thehead.ru")
-        wd.find_element_by_xpath("//button[@type='submit']").click()
-        wd.get("https://partner.qa.price-port.ru/")
     
     def is_element_present(self, how, what):
         try: self.wd.find_element(by=how, value=what)
